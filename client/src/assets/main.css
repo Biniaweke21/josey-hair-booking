@@ -1,0 +1,319 @@
+/* ============================================
+   BEAUTY BY JOSEY – Global Styles
+   ============================================ */
+
+:root {
+  /* ── White + strong-blue palette (Beauty By Josey) ──
+     Everything is white/light; strong blue (#2563EB) is reserved for
+     buttons and key accents. No navy is used as a fill anywhere. Variable
+     names kept from the original system so existing `var(--pink-*)` refs
+     still resolve; the "pink" scale is a light-blue tint scale. */
+  --pink-50:     #EFF6FF;
+  --pink-100:    #DBEAFE;
+  --pink-200:    #BFDBFE;
+  --pink-300:    #93C5FD;
+  --pink-400:    #5BA7FF;   /* accent blue */
+  --pink-500:    #2563EB;   /* strong blue */
+  --pink-600:    #1D4ED8;   /* strong blue, darker */
+  --pink:        #DBEAFE;   /* soft bg tint */
+  --pink-dark:   #93C5FD;
+  --pink-deep:   #5BA7FF;
+
+  --nude:        #F5EDE3;
+  --nude-dark:   #e8d5c0;
+  --gold:        #FACC15;   /* legacy accent (kept for tokens; not used as bg) */
+  --gold-light:  #FDE047;
+  --white:       #FFFFFF;
+  --charcoal:    #1F2937;   /* neutral dark — primary text (no navy) */
+  --charcoal-lt: #475569;   /* slate — secondary text */
+  --gray:        #64748B;
+  --gray-light:  #F8FAFC;   /* neutral light bg */
+  --border:      #E5E7EB;   /* light gray border */
+
+  /* ── Brand colors ── */
+  --accent:         #5BA7FF;   /* accent / focus */
+  --primary:        #2563EB;   /* strong blue — primary buttons */
+  --primary-hover:  #1D4ED8;   /* darker strong blue — button hover */
+  --primary-shadow: rgba(37, 99, 235, 0.28);
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body:    'Outfit', sans-serif;
+
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-full: 999px;
+
+  --shadow-sm:   0 2px 12px rgba(91, 167, 255, 0.07);
+  --shadow-md:   0 8px 32px rgba(91, 167, 255, 0.12);
+  --shadow-lg:   0 16px 48px rgba(91, 167, 255, 0.16);
+
+  --transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --navbar-h:    68px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* prevent horizontal overflow at root */
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--charcoal);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* ensure body never causes horizontal scroll */
+  width: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a   { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
+
+/* ── Typography helpers ── */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--charcoal-lt);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* ── Button system (pink-first) ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.82rem 1.75rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  text-decoration: none;
+  /* prevent button from causing overflow */
+  max-width: 100%;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: 0 4px 18px var(--primary-shadow);
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+  color: var(--white);
+  box-shadow: 0 6px 24px var(--primary-shadow);
+  transform: translateY(-2px);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.15);
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.65);
+  backdrop-filter: blur(4px);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ── Section spacing ── */
+.section { padding: 88px 0; }
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.7rem;
+  margin-bottom: 52px;
+}
+.section-header .section-subtitle { margin: 0 auto; }
+
+/* ── Decorative divider ── */
+.gold-divider {
+  width: 44px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--pink-300));
+  border-radius: 2px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar          { width: 5px; }
+::-webkit-scrollbar-track    { background: var(--pink-50); }
+::-webkit-scrollbar-thumb    { background: var(--pink-300); border-radius: 3px; }
+
+/* ── Sticky mobile Book Now ── */
+.sticky-book-btn { display: none; }
+
+/* ── Page hero (shared across inner pages) ── */
+.page-hero {
+  position: relative;
+  height: 320px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 48px;
+  overflow: hidden;
+  padding-top: var(--navbar-h);
+}
+.page-hero__bg { position: absolute; inset: 0; }
+.page-hero__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.page-hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,10,15,0.78) 0%, rgba(20,10,15,0.28) 100%);
+}
+.page-hero__content {
+  position: relative; z-index: 2;
+  max-width: 1200px; width: 100%;
+  margin: 0 auto; padding: 0 20px;
+  display: flex; flex-direction: column; gap: 0.55rem;
+}
+.page-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700; color: var(--white);
+}
+.page-hero__sub { font-size: 0.98rem; color: rgba(255,255,255,0.75); }
+
+/* ── sr-only ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ── Skeleton loaders (transient; only shown while fetching) ── */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #e9eef5;
+  border-radius: var(--radius-sm);
+}
+.skeleton::after {
+  content: '';
+  position: absolute; inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer { 100% { transform: translateX(100%); } }
+
+/* ── Shared inline empty/error notes ── */
+.state-note {
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.9rem;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+.state-note--error { color: var(--error); }
+.state-retry {
+  background: none; border: none; cursor: pointer;
+  color: var(--primary); font-weight: 600; font-family: var(--font-body);
+  text-decoration: underline; padding: 0; margin-left: 0.25rem;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .sticky-book-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 990;
+    background: var(--primary);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius-full);
+    border: none;
+    box-shadow: 0 8px 28px var(--primary-shadow);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: var(--transition);
+    /* prevent it from overflowing viewport */
+    max-width: calc(100vw - 40px);
+  }
+  .sticky-book-btn:active {
+    transform: translateX(-50%) scale(0.97);
+  }
+  .section { padding: 56px 0; }
+  .section-header { margin-bottom: 36px; }
+  .page-hero { height: 260px; padding-bottom: 36px; }
+}
+
+@media (max-width: 400px) {
+  .section-inner { padding: 0 16px; }
+}
