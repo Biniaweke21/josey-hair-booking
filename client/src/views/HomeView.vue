@@ -485,7 +485,6 @@ function initials(name) {
 
 .gallery-item__img {
   width: 100%; height: 100%; object-fit: cover;
-  object-position: center 25%; /* keep faces and braids in frame on wide tiles */
   object-position: center top;
   transition: transform 0.5s ease;
 }
