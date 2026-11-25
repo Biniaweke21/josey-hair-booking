@@ -131,7 +131,7 @@
     </section>
 
     <!-- ═══ TESTIMONIALS ═══ -->
-    <section class="section testimonials-section" id="testimonials">
+    <section v-if="testimonials.length" class="section testimonials-section" id="testimonials">
       <div class="section-inner">
         <div class="section-header">
           <span class="section-label">Happy Clients</span>
@@ -225,7 +225,7 @@ import {
   Sparkles, ShieldCheck, Clock, Heart
 } from 'lucide-vue-next'
 import TikTokIcon from '@/components/icons/TikTokIcon.vue'
-import { servicesApi } from '@/services/catalog'
+import { categoriesApi, servicesApi } from '@/services/catalog'
 import { galleryApi } from '@/services/gallery'
 import { useSettings } from '@/composables/useSettings'
 import { formatCurrency } from '@/utils/format'
@@ -259,9 +259,14 @@ onMounted(async () => {
   }, 5000)
 
   try {
-    const res = await servicesApi.list()
+    // Feature the salon's lead category (Braid Styling) in menu order,
+    // instead of the first six services alphabetically.
+    const cats = (await categoriesApi.list()).data.data || []
+    const lead = cats.filter((c) => c.is_active).sort((a, b) => a.sort_order - b.sort_order)[0]
+    const res = await servicesApi.list(lead ? { category_id: lead.id } : {})
     services.value = (res.data.data || [])
       .filter((s) => s.is_active)
+      .sort((a, b) => a.sort_order - b.sort_order)
       .slice(0, 6)
       .map((s) => ({
         id: s.id,
@@ -306,14 +311,10 @@ const features = [
   { id: 4, icon: ShieldCheck, title: 'Hygienic & Safe',    text: 'Sterilized tools, clean environment — every single time.'  },
 ]
 
-// Placeholder testimonials: no reviews backend exists, so these are sample
-// content (US names, initials avatars) rather than real endorsements.
-const testimonials = [
-  { name: 'Abel Tewodros',  title: 'Regular Client',  service: 'Balayage',       stars: 5, review: 'Booked for the first time and I\'m obsessed! Josey listened to every detail and delivered beyond my expectations. The vibe, the quality, the results — I\'m never going anywhere else!' },
-  { name: 'Danielle Carter', title: 'Content Creator', service: 'Knotless Braids', stars: 5, review: 'Honestly a genius with hair. I showed one reference photo and she created something even better. The detail and the finish were perfect. My go-to forever!' },
-  { name: 'Maria Gonzalez',  title: 'Teacher',         service: 'Silk Press',      stars: 5, review: 'I\'ve been to a lot of salons but nothing compares. Such a gentle touch and the work lasts forever. My style still looks flawless weeks later!' },
-  { name: 'Jasmine Lee',     title: 'Nurse',           service: 'Full Color',      stars: 5, review: 'So talented and professional. She took her time and the color was exactly what I wanted. The salon is clean, cozy, and the whole experience felt luxurious. Highly recommend!' },
-]
+// Real client reviews only (with their permission). The template's sample
+// reviews were removed because they read as real endorsements; the section
+// stays hidden while this list is empty.
+const testimonials = []
 
 const activeTestimonial = ref(0)
 const trackRef = ref(null)
