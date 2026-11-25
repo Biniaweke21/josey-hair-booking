@@ -21,6 +21,13 @@
           <a :href="`tel:${phone}`">{{ phone }}</a>.
         </p>
 
+        <!-- Salon policies (from Beauty By Josey's own policy card) -->
+        <ul class="booking-policies" aria-label="Before you book">
+          <li><strong>Deposit:</strong> a $30 non-refundable deposit secures your appointment. It can be moved to a new date if you reschedule at least 24 hours ahead.</li>
+          <li><strong>Hair included:</strong> braiding hair is included in all braid styles, in colors 1B, 1, 2, 4, 27, 30, 33 and 613. Human hair is not provided for braids.</li>
+          <li><strong>No extra guests:</strong> please come alone. Kids are welcome to be dropped off and picked up when their service is done.</li>
+        </ul>
+
         <!-- Step indicator -->
         <div class="steps" role="list" aria-label="Booking steps">
           <div
@@ -948,6 +955,22 @@ async function confirmBooking() {
   margin-bottom: 1.5rem;
 }
 .booking-preview a { color: inherit; font-weight: 700; }
+
+.booking-policies {
+  list-style: none;
+  margin: 0 auto 1.75rem;
+  padding: 1rem 1.25rem;
+  max-width: 660px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #4b5563;
+  display: grid;
+  gap: 0.45rem;
+}
+.booking-policies strong { color: #111827; }
 
 .booking-error {
   background: #fee;

@@ -13,23 +13,28 @@ function unsplash(host, id, w, h) {
 const img = (id, w, h) => unsplash('images.unsplash.com', id, w, h)
 const premium = (id, w, h) => unsplash('plus.unsplash.com', id, w, h)
 
+// Braid-focused photography from Pexels (free for commercial use, no
+// attribution required), used until the salon uploads its own photos.
+const pexels = (id, w, h) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=${w}&h=${h}`
+
 // Rotating homepage hero background (full-bleed, wide).
 export const HERO_IMAGES = [
-  img('photo-1637777277337-f114350fb088', 1600, 1000), // salon interior
-  img('photo-1541533848490-bc8115cd6522', 1600, 1000), // stylist cutting hair
-  img('photo-1472747624745-ce92d32d3c24', 1600, 1000), // braided hair
-  img('photo-1605980766335-d3a41c7332a1', 1600, 1000), // blonde highlighted hair
-  img('photo-1560869713-bf165a9cfac1', 1600, 1000) // long flowing hair
+  pexels(18006319, 1600, 1000), // knotless braids
+  pexels(19177101, 1600, 1000), // braids with highlights
+  pexels(11515382, 1600, 1000), // box braids
+  pexels(32426283, 1600, 1000), // stitch cornrows
+  pexels(30584121, 1600, 1000) // braids with gold cuffs
 ]
 
 // Shared page-hero banner (Services, Gallery, Contact, Booking, admin login bg) - short and wide.
-export const PAGE_HERO_IMAGE = img('photo-1637777277337-f114350fb088', 1600, 500)
+export const PAGE_HERO_IMAGE = pexels(19177101, 1600, 500)
 
 // "Ready for your perfect hair?" CTA banner.
-export const CTA_IMAGE = premium('premium_photo-1664537435529-3ce53ff7de20', 1600, 1000)
+export const CTA_IMAGE = pexels(35272483, 1600, 1000)
 
 // Generic fallback for a service/category with no uploaded photo yet.
-export const FALLBACK_SERVICE_IMAGE = premium('premium_photo-1664537435457-da6196c5f49f', 800, 650)
+export const FALLBACK_SERVICE_IMAGE = pexels(11515382, 800, 650)
 
 // Admin login page photo collage (square cells).
 export const ADMIN_LOGIN_COLLAGE = [
