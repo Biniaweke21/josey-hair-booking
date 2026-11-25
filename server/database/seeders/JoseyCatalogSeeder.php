@@ -24,9 +24,9 @@ use Illuminate\Support\Str;
  * DURATIONS: her site lists almost none, so most minutes below are ESTIMATES
  * for scheduling only. Josey should confirm them in Admin > Services.
  *
- * Staff: one stylist ("Josey") on her advertised hours, daily 9am-7pm, so the
- * calendar never offers more parallel slots than she can serve. Add stylists in
- * Admin > Employees to open more capacity.
+ * Staff: one stylist ("Josey") working every day, with the salon open on her
+ * advertised hours (daily 9am-7pm), so the calendar never offers more parallel
+ * slots than she can serve. Add stylists in Admin > Employees for more capacity.
  *
  * Run: php artisan db:seed --class=JoseyCatalogSeeder   (safe to re-run)
  */
@@ -185,11 +185,13 @@ class JoseyCatalogSeeder extends Seeder
             BusinessHour::updateOrCreate(['day_of_week' => $day], ['is_closed' => false, 'open_time' => '09:00', 'close_time' => '19:00']);
         }
 
+        // A weekly schedule only records which days she works; the hours come
+        // from the business hours above.
         $josey = Employee::firstOrCreate(['name' => 'Josey'], ['is_active' => true]);
         foreach (range(0, 6) as $day) {
             EmployeeWeeklySchedule::firstOrCreate(
                 ['employee_id' => $josey->id, 'day_of_week' => $day],
-                ['start_time' => '09:00', 'end_time' => '19:00', 'is_active' => true],
+                ['is_active' => true],
             );
         }
     }
