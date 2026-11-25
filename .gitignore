@@ -8,8 +8,5 @@ dist/
 .vscode/
 *.log
 .phpunit.result.cache
-server/storage/logs/*
-server/storage/framework/**/*
-!server/storage/**/.gitignore
 server/public/storage
 .DS_Store

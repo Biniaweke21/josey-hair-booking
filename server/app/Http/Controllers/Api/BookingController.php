@@ -28,6 +28,13 @@ class BookingController extends Controller
 
     public function store(StoreBookingRequest $request): JsonResponse
     {
+        // Preview mode: the site and booking flow work, but nothing is booked.
+        if (! config('app.bookings_open')) {
+            return response()->json([
+                'message' => "Online booking isn't open yet. Please call the salon to book your appointment.",
+            ], 503);
+        }
+
         $booking = $this->bookings->create(
             $request->input('customer'),
             $request->input('booking_date'),

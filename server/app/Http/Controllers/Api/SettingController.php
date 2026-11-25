@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\UpdateSettingsRequest;
 use App\Http\Requests\Setting\UploadLogoRequest;
 use App\Services\SettingService;
+use App\Support\ImageUrl;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -43,7 +43,7 @@ class SettingController extends Controller
             'message' => 'Logo uploaded successfully.',
             'data' => [
                 'path' => $path,
-                'url' => Storage::disk('public')->url($path),
+                'url' => ImageUrl::for($path),
             ],
         ]);
     }

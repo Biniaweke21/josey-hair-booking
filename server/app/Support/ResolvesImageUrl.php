@@ -2,8 +2,6 @@
 
 namespace App\Support;
 
-use Illuminate\Support\Facades\Storage;
-
 trait ResolvesImageUrl
 {
     /**
@@ -13,14 +11,6 @@ trait ResolvesImageUrl
      */
     protected function resolveImageUrl(?string $path): ?string
     {
-        if (! $path) {
-            return null;
-        }
-
-        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-            return $path;
-        }
-
-        return Storage::disk('public')->url($path);
+        return ImageUrl::for($path);
     }
 }

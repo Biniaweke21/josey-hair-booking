@@ -38,7 +38,20 @@ return [
             'report' => false,
         ],
 
-        'public' => [
+        // Uploaded images. Local disk in development; in production (free host with an
+        // ephemeral disk) PUBLIC_DISK_DRIVER=s3 points it at a private Backblaze B2
+        // bucket, and App\Support\ImageUrl serves the files through signed links.
+        'public' => env('PUBLIC_DISK_DRIVER', 'local') === 's3' ? [
+            'driver' => 's3',
+            'key' => env('B2_KEY_ID'),
+            'secret' => env('B2_APPLICATION_KEY'),
+            'region' => env('B2_REGION', 'us-east-005'),
+            'bucket' => env('B2_BUCKET'),
+            'endpoint' => 'https://'.env('B2_ENDPOINT'),
+            'visibility' => 'private',
+            'throw' => true,
+            'report' => true,
+        ] : [
             'driver' => 'local',
             'root' => storage_path('app/public'),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',

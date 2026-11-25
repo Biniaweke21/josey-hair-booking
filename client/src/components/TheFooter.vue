@@ -62,8 +62,8 @@
     </div>
 
     <div class="footer__bottom">
-      <p><a href="https://www.instagram.com/heb_el1" target="_blank" rel="noopener noreferrer" class="footer__year-link">© {{ year }} {{ salonName }}. All rights reserved.</a></p>
-      <p class="footer__made">Developed by <a href="#" class="footer__vibey">Vibey Worlds</a></p>
+      <p>© {{ year }} {{ salonName }}. All rights reserved.</p>
+      <p class="footer__made">Developed by <a href="https://vibeyworlds.com" target="_blank" rel="noopener noreferrer" class="footer__vibey">Vibey Worlds</a></p>
     </div>
   </footer>
 </template>

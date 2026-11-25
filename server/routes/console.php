@@ -10,3 +10,9 @@ Artisan::command('inspire', function () {
 
 Schedule::command('bookings:send-reminders')->everyFifteenMinutes();
 Schedule::command('bookings:auto-progress')->everyMinute();
+
+// The free host has no separate queue worker, so drain the queue (booking
+// emails) from the scheduler once a minute instead.
+Schedule::command('queue:work --stop-when-empty --max-time=50 --tries=3')
+    ->everyMinute()
+    ->withoutOverlapping();

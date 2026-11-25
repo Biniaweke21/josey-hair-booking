@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Support\ImageUrl;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,6 +22,10 @@ class ImageUploadService
 
     public function url(?string $path, string $disk = 'public'): ?string
     {
+        if ($disk === 'public') {
+            return ImageUrl::for($path);
+        }
+
         return $path ? Storage::disk($disk)->url($path) : null;
     }
 }

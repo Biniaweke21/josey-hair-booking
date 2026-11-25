@@ -2,10 +2,10 @@
   <header class="navbar" :class="{ 'navbar--scrolled': scrolled }">
     <div class="navbar__inner">
 
-      <a href="https://www.instagram.com/heb_el1" target="_blank" rel="noopener noreferrer" class="navbar__logo">
+      <RouterLink to="/" class="navbar__logo">
         <img src="/images/josey.jpg" :alt="salonName" class="navbar__logo-img" />
         <span class="logo-text">{{ salonName }}</span>
-      </a>
+      </RouterLink>
 
       <!-- Desktop Nav -->
       <nav class="navbar__nav" role="navigation" aria-label="Main navigation">

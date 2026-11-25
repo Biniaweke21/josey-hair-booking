@@ -69,6 +69,9 @@ return [
 
     'timezone' => 'UTC',
 
+    // false = preview mode: the public site works but POST /booking is refused.
+    'bookings_open' => (bool) env('BOOKINGS_OPEN', true),
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

@@ -15,6 +15,12 @@
     <section class="section booking-section">
       <div class="section-inner booking-inner">
 
+        <!-- Preview mode: browse freely, but bookings are taken by phone for now -->
+        <p v-if="previewMode" class="booking-preview">
+          Online booking opens soon. To book now, call
+          <a :href="`tel:${phone}`">{{ phone }}</a>.
+        </p>
+
         <!-- Step indicator -->
         <div class="steps" role="list" aria-label="Booking steps">
           <div
@@ -282,7 +288,7 @@
                   <Phone :size="16" class="booking-form__input-icon" aria-hidden="true" />
                   <input
                     id="bk-phone" v-model="booking.phone" type="tel"
-                    placeholder="+1 (240) 462-7931"
+                    placeholder="+1 (555) 123-4567"
                     class="booking-form__input" autocomplete="tel"
                   />
                 </div>
@@ -364,6 +370,10 @@ import { publicBookingApi } from '@/services/booking'
 import { formatCurrency, formatDuration, formatTime12 } from '@/utils/format'
 import { apiErrorMessage } from '@/services/api'
 import { PAGE_HERO_IMAGE, FALLBACK_SERVICE_IMAGE } from '@/utils/stockImages'
+import { useSettings } from '@/composables/useSettings'
+
+const previewMode = import.meta.env.VITE_PREVIEW_MODE === 'true'
+const { phone } = useSettings()
 
 const route = useRoute()
 const heroImg = PAGE_HERO_IMAGE
@@ -926,6 +936,18 @@ async function confirmBooking() {
 .cal-legend__dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 .cal-legend__dot--closed { background: var(--border); }
 .cal-legend__dot--past   { background: var(--gray-light); border: 1px solid var(--border); }
+
+.booking-preview {
+  background: #eef4ff;
+  border: 1px solid #c7d7fe;
+  color: #1e3a8a;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.booking-preview a { color: inherit; font-weight: 700; }
 
 .booking-error {
   background: #fee;
